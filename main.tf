@@ -5,6 +5,13 @@ terraform {
       version = ">= 3.61.0, < 4.0.0"
     }
   }
+
+  backend "remote" {
+    organization = "Red-Ping"
+    workspaces {
+      name = "Red-Ping-API-Prod"
+    }
+  }
 }
 
 provider "azurerm" {
@@ -12,7 +19,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "rg-redpingapi-${var.naming_suffix}"
+  name     = "rg-redpingapi-${var.name_suffix}"
   location = var.location
   tags     = var.tags
 }

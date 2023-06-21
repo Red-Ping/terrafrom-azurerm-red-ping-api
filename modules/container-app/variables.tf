@@ -8,7 +8,7 @@ variable "log_analytics_workspace_id" {
   type        = string
 
   validation {
-    condition     = regexall("^\\/subscriptions\\/[a-z0-9\\-]+\\/resourceGroups\\/[a-z0-9\\-]+\\/providers\\/Microsoft\\.OperationalInsights\\/workspaces\\/[a-z0-9\\-]+$", var.log_analytics_workspace_id) == 1
+    condition     = length(regexall("^\\/subscriptions\\/[a-z0-9\\-]+\\/resourceGroups\\/[a-z0-9\\-]+\\/providers\\/Microsoft\\.OperationalInsights\\/workspaces\\/[a-z0-9\\-]+$", var.log_analytics_workspace_id)) == 1
     error_message = "Not a valid azure resoure ID for a workspace"
   }
 }
@@ -21,7 +21,7 @@ variable "name_suffix" {
   default     = "prod-1"
 
   validation {
-    condition     = regexall("^[a-z0-9]+(\\-[a-z0-9]+)*$", var.name_suffix) == 1
+    condition     = length(regexall("^[a-z0-9]+(\\-[a-z0-9]+)*$", var.name_suffix)) == 1
     error_message = "Must only contain lowercase leters, number and hyphens. Can't start or end with a hyphen and two characters or longer"
   }
 }
